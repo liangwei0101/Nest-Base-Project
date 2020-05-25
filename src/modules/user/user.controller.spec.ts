@@ -10,6 +10,7 @@ describe('User Controller', () => {
   const url = '/user';
   let app: INestApplication;
   let userService: UserService;
+  let userController: UserController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
@@ -20,7 +21,7 @@ describe('User Controller', () => {
           provide: getRepositoryToken(User),
           useValue: {
             getUserList: async () => Promise.resolve([]),
-            createUser: async () => Promise.resolve({}) 
+            createUser: async () => Promise.resolve({})
           },
         },
       ],
@@ -30,6 +31,7 @@ describe('User Controller', () => {
     await app.init();
 
     userService = module.get<UserService>(UserService);
+    userController = module.get<UserController>(UserController);
   });
 
   it('user get', async () => {
@@ -52,6 +54,13 @@ describe('User Controller', () => {
       .send(result)
       .expect(201)
       .expect(await userService.createUser({ name: '123', account: "1234" }));
+  });
+
+  it('user post error', done => {
+    request(app.getHttpServer())
+      .post('/user')
+      .send({ name: "123456" })
+      .expect(201)
   });
 
   afterAll(async () => {
