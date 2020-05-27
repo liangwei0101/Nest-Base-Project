@@ -1,4 +1,5 @@
 import { getSomeMonthEndDate, getSomeMonthStartDate } from './dateUtil';
+import { encryptPassword } from './cryptogramUtil';
 
 describe('dateUtil', () => {
 
@@ -19,5 +20,9 @@ describe('dateUtil', () => {
     }
     lastDay = days[data.getMonth()];
     expect(lastDay).toBe(data.getDate());
+  });
+
+  it('encryptPassword', () => {
+    expect(encryptPassword("1")).toBe('c4ca4238a0b923820dcc509a6f75849b')
   });
 });
