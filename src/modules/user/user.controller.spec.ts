@@ -46,7 +46,7 @@ describe('User Controller', () => {
   });
 
   it('user post', async () => {
-    const result: User = { id: "1", name: '123', account: "1234" };
+    const result: User = { id: "1", name: '123', account: "1234", password: "12" };
 
     jest.spyOn(userService, 'createUser').mockImplementation(async () => result);
     return request(app.getHttpServer())
@@ -56,11 +56,14 @@ describe('User Controller', () => {
       .expect(await userService.createUser({ name: '123', account: "1234" }));
   });
 
-  it('user post error', done => {
-    request(app.getHttpServer())
+  it('user post error', () => {
+    return request(app.getHttpServer())
       .post('/user')
-      .send({ name: "123456" })
+      .send({ account: '1234' })
       .expect(201)
+      .expect({
+        statusCode: 400,
+      });
   });
 
   afterAll(async () => {
