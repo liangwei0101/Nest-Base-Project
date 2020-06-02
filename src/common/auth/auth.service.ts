@@ -5,7 +5,10 @@ import { User } from 'src/modules/user/user.entity';
 
 @Injectable()
 export class AuthService {
-  constructor(private readonly userService: UserService, private readonly jwtService: JwtService) { }
+  constructor(
+    private readonly jwtService: JwtService,
+    private readonly userService: UserService,
+  ) { }
 
   /**
   * 验证用户

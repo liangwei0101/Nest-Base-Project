@@ -18,11 +18,6 @@ import { JwtModule } from '@nestjs/jwt';
       useFactory: (configService: ConfigService) => configService.get('DATABASE_CONFIG'),
       inject: [ConfigService], // 记得注入服务，不然useFactory函数中获取不到ConfigService
     }),
-    PassportModule.register({ defaultStrategy: 'jwt' }),
-    JwtModule.register({
-      secret: 'jwt',
-      signOptions: { expiresIn: '24h' }, // token 过期时效
-    }),
     UserModule,
     AuthModule
   ],
