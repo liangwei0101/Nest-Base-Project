@@ -21,6 +21,13 @@ export class UserService {
   }
 
   /**
+  * 获取用户
+  */
+  async findOne(account: string) {
+    return await this.usersRepository.findOne({ where: { account: account } });
+  }
+
+  /**
   * 创建用户
   */
   async createUser(dto: CreateUserDto): Promise<User> {

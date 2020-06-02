@@ -2,7 +2,10 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { AuthModule } from './common/auth/auth.module';
 import customConfig from './config/index';
+import { PassportModule } from '@nestjs/passport';
+import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
@@ -15,7 +18,13 @@ import customConfig from './config/index';
       useFactory: (configService: ConfigService) => configService.get('DATABASE_CONFIG'),
       inject: [ConfigService], // 记得注入服务，不然useFactory函数中获取不到ConfigService
     }),
-    UserModule
+    PassportModule.register({ defaultStrategy: 'jwt' }),
+    JwtModule.register({
+      secret: 'jwt',
+      signOptions: { expiresIn: '24h' }, // token 过期时效
+    }),
+    UserModule,
+    AuthModule
   ],
 })
 export class AppModule { }
