@@ -3,8 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { User } from './user.entity';
 import { getRepositoryToken } from '@nestjs/typeorm';
+import { User } from '../../entity/user.entity';
 
 describe('User Controller', () => {
   const url = '/user';
