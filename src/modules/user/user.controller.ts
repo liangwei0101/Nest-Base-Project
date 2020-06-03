@@ -3,14 +3,14 @@ import { UserService } from './user.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
 import { User } from './user.entity';
-import { AuthService } from 'src/common/auth/auth.service';
+import { AuthService } from '../auth/auth.service';
 
 @ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
-    // private readonly authService: AuthService
+    private readonly authService: AuthService
   ) { }
 
   @Get()
@@ -28,6 +28,6 @@ export class UserController {
   @Post('/login')
   @ApiOperation({ description: '用户登录' })
   async login(@Body() loginParams: User) {
-    // return this.authService.validateUser(loginParams.account, loginParams.password);
+    return this.authService.validateUser(loginParams.account, loginParams.password);
   }
 }
