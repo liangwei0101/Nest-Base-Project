@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { User } from './user.entity';
 import { CreateUserDto } from './userDto';
+import { User } from '../../entity/user.entity';
 
 @Injectable()
 export class UserService {
@@ -18,6 +18,13 @@ export class UserService {
     // const userList = await this.usersRepository.find();
     // console.log(userList)
     return [];
+  }
+
+  /**
+  * 获取用户
+  */
+  async findOneByAccount(account: string) {
+    return await this.usersRepository.findOne({ where: { account: account } });
   }
 
   /**

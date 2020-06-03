@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import customConfig from './config/index';
+import { AuthModule } from './modules/auth/auth.module';
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import customConfig from './config/index';
       useFactory: (configService: ConfigService) => configService.get('DATABASE_CONFIG'),
       inject: [ConfigService], // 记得注入服务，不然useFactory函数中获取不到ConfigService
     }),
-    UserModule
+    UserModule,
+    AuthModule
   ],
 })
 export class AppModule { }
