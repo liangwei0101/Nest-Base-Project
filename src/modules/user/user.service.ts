@@ -23,7 +23,7 @@ export class UserService {
   /**
   * 获取用户
   */
-  async findOne(account: string) {
+  async findOneByAccount(account: string) {
     return await this.usersRepository.findOne({ where: { account: account } });
   }
 

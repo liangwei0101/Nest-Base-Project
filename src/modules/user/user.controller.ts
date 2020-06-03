@@ -3,12 +3,14 @@ import { UserService } from './user.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
 import { User } from './user.entity';
+import { AuthService } from 'src/common/auth/auth.service';
 
 @ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(
     private readonly userService: UserService,
+    // private readonly authService: AuthService
   ) { }
 
   @Get()

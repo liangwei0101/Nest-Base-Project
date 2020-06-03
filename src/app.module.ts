@@ -2,10 +2,8 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './modules/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { AuthModule } from './common/auth/auth.module';
 import customConfig from './config/index';
-import { PassportModule } from '@nestjs/passport';
-import { JwtModule } from '@nestjs/jwt';
+import { AuthModule } from './common/auth/auth.module';
 
 @Module({
   imports: [

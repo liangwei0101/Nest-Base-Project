@@ -6,15 +6,15 @@ import { User } from 'src/modules/user/user.entity';
 @Injectable()
 export class AuthService {
   constructor(
-    private readonly jwtService: JwtService,
     private readonly userService: UserService,
+    private readonly jwtService: JwtService,
   ) { }
 
   /**
   * 验证用户
   */
   async validateUser(account: string, pass: string) {
-    const user = await this.userService.findOne(account);
+    const user = await this.userService.findOneByAccount(account);
     if (user && user.password === pass) {
       const { password, ...result } = user;
       return result;
