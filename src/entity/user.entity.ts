@@ -18,4 +18,8 @@ export class User {
   @Column()
   @ApiProperty({ description: '用户密码', required: true })
   password: string
+
+  @Column()
+  @ApiProperty({ description: '用户角色', required: true })
+  role: number
 }
