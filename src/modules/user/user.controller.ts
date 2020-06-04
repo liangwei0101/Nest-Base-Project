@@ -4,6 +4,7 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
 import { AuthService } from '../../common/auth/auth.service';
 import { User } from '../../entity/user.entity';
+import { NoAuth } from 'src/common/decorator/customize';
 
 @ApiTags('user')
 @Controller('user')
@@ -25,6 +26,7 @@ export class UserController {
     return await this.userService.createUser(createUserDto);
   }
 
+  @NoAuth()
   @Post('/login')
   @ApiOperation({ description: '用户登录' })
   async login(@Body() loginParams: User) {

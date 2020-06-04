@@ -13,22 +13,19 @@ export class HttpExceptionFilter implements ExceptionFilter {
     if (exception instanceof CustomException) {
       // 自定义异常
       errorResponse = {
-        errorMessage: exception.getErrorMessage(),
         code: exception.getErrorCode(), // 错误code
+        errorMessage: exception.getErrorMessage(),
         message: 'error',
-        date: date,
         url: request.originalUrl, // 错误的url地址
+        date: date,
       };
     } else {
       // 非自定义异常
       errorResponse = {
-        data: {
-          error: exception.message,
-        },
-        message: 'error',
-        date: date,
         code: exception.getStatus(), // 错误code
+        errorMessage: exception.message,
         url: request.originalUrl, // 错误的url地址
+        date: date,
       };
     }
     const status =

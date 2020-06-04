@@ -4,6 +4,8 @@ import { UserModule } from './modules/user/user.module';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import customConfig from './config/index';
 import { AuthModule } from './common/auth/auth.module';
+import { APP_GUARD } from '@nestjs/core';
+import { RoleAuthGuard } from './common/globalGuard/roleAuthGuard';
 
 @Module({
   imports: [
@@ -19,5 +21,12 @@ import { AuthModule } from './common/auth/auth.module';
     UserModule,
     AuthModule
   ],
+  providers: [
+    {
+      // 设置全局守卫，useClass为自定义的Guard
+      provide: APP_GUARD,
+      useClass: RoleAuthGuard,
+    },
+  ]
 })
 export class AppModule { }
