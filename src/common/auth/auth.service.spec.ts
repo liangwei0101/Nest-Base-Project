@@ -1,9 +1,7 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { AuthService } from './auth.service';
 import { JwtStrategy } from './jwt.strategy';
-import { UserService } from '../user/user.service';
-import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from '../../entity/user.entity';
+import { UserService } from '../../modules/user/user.service';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';

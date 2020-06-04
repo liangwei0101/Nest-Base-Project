@@ -1,21 +1,16 @@
-import {
-  Injectable,
-  UnauthorizedException,
-  HttpException,
-  HttpStatus,
-} from '@nestjs/common';
+import { Injectable, UnauthorizedException, } from '@nestjs/common';
 import { UserService } from '../../modules/user/user.service';
 import { JwtService } from '@nestjs/jwt';
 import { User } from '../../entity/user.entity';
-import { ApiErrorCode, ApiErrorMessage } from '../../common/enum/apiErrorCode';
-import { CustomException } from 'src/common/httpHandle/customException';
+import { ApiErrorCode, ApiErrorMessage } from '../enum/apiErrorCode';
+import { CustomException } from '../../common/httpHandle/customException';
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-  ) {}
+  ) { }
 
   /**
    * 验证用户
