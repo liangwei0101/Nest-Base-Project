@@ -29,6 +29,8 @@
     "@nestjs/platform-express": "^7.1.2",
     "@nestjs/swagger": "^4.5.7",
     "@nestjs/typeorm": "^7.0.0",
+    "@types/passport-jwt": "^3.0.3",
+    "@types/passport-local": "^1.0.33",
     "class-transformer": "^0.2.3",
     "class-validator": "^0.12.2",
     "mysql": "^2.18.1",
