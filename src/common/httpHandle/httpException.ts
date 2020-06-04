@@ -8,12 +8,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
     const response = ctx.getResponse();
     const request = ctx.getRequest();
     let errorResponse: any;
-    const date = new Date().toLocaleDateString() + ' ' +new Date().toLocaleTimeString();
+    const date = new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString();
 
     if (exception instanceof CustomException) {
       // 自定义异常
       errorResponse = {
-        data: { errorMessage: exception.getErrorMessage() },
+        errorMessage: exception.getErrorMessage(),
         code: exception.getErrorCode(), // 错误code
         message: 'error',
         date: date,
