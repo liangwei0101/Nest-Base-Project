@@ -1,5 +1,6 @@
 import { getSomeMonthEndDate, getSomeMonthStartDate } from './dateUtil';
 import { encryptPassword } from './cryptogramUtil';
+import { createSomeDigitNumber } from './stringUtil';
 
 describe('dateUtil', () => {
 
@@ -24,5 +25,11 @@ describe('dateUtil', () => {
 
   it('encryptPassword', () => {
     expect(encryptPassword("1")).toBe('c4ca4238a0b923820dcc509a6f75849b')
+  });
+
+  it('createSomeDigitNumber', () => {
+    const digit = 4;
+    const str = createSomeDigitNumber(4);
+    expect(str.length).toBe(digit)
   });
 });
