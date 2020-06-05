@@ -4,6 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { TransformInterceptor } from './common/httpHandle/transform.interceptor';
 import { HttpExceptionFilter } from './common/httpHandle/httpException';
+import { RolesGuard } from './common/globalGuard/roles.guard';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -15,6 +16,9 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
+
+  // 全局使用角色验证
+  app.useGlobalGuards(new RolesGuard());
 
   // 全局使用管道
   app.useGlobalPipes(new ValidationPipe());
