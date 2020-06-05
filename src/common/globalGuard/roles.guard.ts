@@ -8,7 +8,7 @@ export class RolesGuard implements CanActivate {
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
 
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
-    // 无角色注释时，api任务权限都能访问
+    // 无角色注解时，api任何角色都能访问
     if (!roles) {
       return true;
     }
