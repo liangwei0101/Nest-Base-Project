@@ -17,9 +17,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup('api', app, document);
 
-  // 全局使用角色验证
-  app.useGlobalGuards(new RolesGuard());
-
   // 全局使用管道
   app.useGlobalPipes(new ValidationPipe());
 
