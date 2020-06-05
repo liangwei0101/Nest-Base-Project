@@ -1,6 +1,6 @@
 import { getSomeMonthEndDate, getSomeMonthStartDate } from './dateUtil';
 import { encryptPassword } from './cryptogramUtil';
-import { createSomeDigitNumber } from './stringUtil';
+import { createSomeDigitNumber, formatAmount } from './stringUtil';
 
 describe('dateUtil', () => {
 
@@ -31,5 +31,11 @@ describe('dateUtil', () => {
     const digit = 4;
     const str = createSomeDigitNumber(4);
     expect(str.length).toBe(digit)
+  });
+
+  it('formatAmount', () => {
+    const num = 1000;
+    const str = formatAmount(num);
+    expect(str).toBe('1,000')
   });
 });

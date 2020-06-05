@@ -9,3 +9,11 @@ export const createSomeDigitNumber = (digit: number) => {
   }
   return randomCode;
 }
+
+
+/**
+* 数字格式化
+*/
+export const formatAmount = (num: number) => {
+  return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+}
