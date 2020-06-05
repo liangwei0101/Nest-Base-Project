@@ -4,7 +4,7 @@ import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
 import { AuthService } from '../../common/auth/auth.service';
 import { User } from '../../entity/user.entity';
-import { NoAuth } from 'src/common/decorator/customize';
+import { NoAuth, Roles } from 'src/common/decorator/customize';
 
 @ApiTags('user')
 @Controller('user')
@@ -18,6 +18,13 @@ export class UserController {
   @ApiOperation({ description: '获取用户列表' })
   async userList() {
     return await this.userService.getUserList();
+  }
+
+  @Post('/update')
+  @Roles('admin')
+  @ApiOperation({ description: '只能是admin做这个事情' })
+  async adminUpdaeData() {
+    return true;
   }
 
   @Post()
