@@ -48,7 +48,7 @@ describe('User Controller', () => {
   });
 
   it('user post', async () => {
-    const result: User = { id: "1", name: '123', account: "1234", password: "12" };
+    const result: User = { id: "1", name: '123', account: "1234", password: "12", role: 0 };
 
     jest.spyOn(userService, 'createUser').mockImplementation(async () => result);
     return request(app.getHttpServer())
