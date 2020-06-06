@@ -23,11 +23,11 @@ import { GlobalAuthGuard } from './common/globalGuard/auth.guard';
     AuthModule
   ],
   providers: [
-    {
-      // 设置全局守卫
-      provide: APP_GUARD,
-      useClass: GlobalAuthGuard,
-    },
+    // {
+    //   // 设置全局守卫
+    //   provide: APP_GUARD,
+    //   useClass: GlobalAuthGuard,
+    // },
     // {
     //   // 设置全局角色守卫
     //   provide: APP_GUARD,

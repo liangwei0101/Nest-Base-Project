@@ -2,13 +2,12 @@ import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
-import { AuthService } from '../../common/auth/auth.service';
-import { User } from '../../entity/user.entity';
-import { NoAuth, Roles } from '../../common/decorator/customize';
-import { LocalAuthGuard } from '../../common/auth/guards/auth.local.guard';
+import { Roles } from '../../common/decorator/customize';
+import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../../common/auth/guards/jwt.auth.guard';
 
 @ApiTags('user')
+@UseGuards(AuthGuard('jwt'))
 @Controller('user')
 export class UserController {
   constructor(
@@ -22,7 +21,7 @@ export class UserController {
   }
 
   @Post('/test')
-  @Roles('admin')
+  // @Roles('admin')
   @ApiOperation({ description: '只能是admin做这个事情' })
   async adminUpdaeData() {
     return true;
