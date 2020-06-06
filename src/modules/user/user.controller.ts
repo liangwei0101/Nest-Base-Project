@@ -20,7 +20,7 @@ export class UserController {
     return await this.userService.getUserList();
   }
 
-  @Post('/update')
+  @Post('/test')
   @Roles('admin')
   @ApiOperation({ description: '只能是admin做这个事情' })
   async adminUpdaeData() {

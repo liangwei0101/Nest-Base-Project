@@ -8,16 +8,17 @@ import { UserService } from '../../modules/user/user.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../../entity/user.entity';
 
+const passportModule = PassportModule.register({ defaultStrategy: 'jwt' });
 @Module({
   imports: [
     TypeOrmModule.forFeature([User]),
-    PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
-      secret: jwtConstants.secret,
+      secretOrPrivateKey: jwtConstants.secret,
       signOptions: { expiresIn: '24h' },
     }),
+    passportModule
   ],
   providers: [AuthService, JwtStrategy, UserService],
-  exports: [AuthService]
+  exports: [AuthService, passportModule]
 })
 export class AuthModule { }

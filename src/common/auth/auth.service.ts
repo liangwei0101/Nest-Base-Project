@@ -36,6 +36,15 @@ export class AuthService {
   }
 
   /**
+   * 验证用户
+   */
+  async validateUser1(payload: any): Promise<User> {
+    console.log(payload);
+    const user = new User();
+    return user;
+  }
+
+  /**
    * 创建jwt
    */
   createJWT(user: User) {

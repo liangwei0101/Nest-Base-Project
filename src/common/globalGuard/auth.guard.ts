@@ -8,6 +8,7 @@ export class RoleAuthGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) { }
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
     // 在这里取metadata中的no-auth，得到的会是一个bool
+    console.log('------------全局验证守卫-------------------')
     const noAuth = this.reflector.get<boolean>('no-auth', context.getHandler());
     const guard = RoleAuthGuard.getAuthGuard(noAuth);
     return guard.canActivate(context);    //    执行所选策略Guard的canActivate方法

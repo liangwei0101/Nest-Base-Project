@@ -11,6 +11,6 @@ export class Context {
   constructor(@Inject(REQUEST) private readonly request: Request) { }
 
   // async getUser(): Promise<User> {
-  //   // return this.request.user;
+  //   return this.request.user;
   // }
 }

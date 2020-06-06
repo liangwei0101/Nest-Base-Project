@@ -4,7 +4,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { TransformInterceptor } from './common/httpHandle/transform.interceptor';
 import { HttpExceptionFilter } from './common/httpHandle/httpException';
-import { RolesGuard } from './common/globalGuard/roles.guard';
+import { TimeoutInterceptor } from './common/interceptor/timeout.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -25,6 +25,9 @@ async function bootstrap() {
 
   // 全局注册拦截器
   app.useGlobalInterceptors(new TransformInterceptor());
+
+  // 全局使用超时拦截
+  app.useGlobalInterceptors(new TimeoutInterceptor()); 
 
   await app.listen(3000);
 }

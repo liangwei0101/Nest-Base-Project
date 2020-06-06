@@ -5,8 +5,8 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import customConfig from './config/index';
 import { AuthModule } from './common/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
-import { RoleAuthGuard } from './common/globalGuard/roleAuthGuard';
 import { RolesGuard } from './common/globalGuard/roles.guard';
+import { RoleAuthGuard } from './common/globalGuard/auth.guard';
 
 @Module({
   imports: [
