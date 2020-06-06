@@ -6,7 +6,7 @@ import customConfig from './config/index';
 import { AuthModule } from './common/auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { RolesGuard } from './common/globalGuard/roles.guard';
-import { RoleAuthGuard } from './common/globalGuard/auth.guard';
+import { GlobalAuthGuard } from './common/globalGuard/auth.guard';
 
 @Module({
   imports: [
@@ -26,13 +26,13 @@ import { RoleAuthGuard } from './common/globalGuard/auth.guard';
     {
       // 设置全局守卫
       provide: APP_GUARD,
-      useClass: RoleAuthGuard,
+      useClass: GlobalAuthGuard,
     },
-    {
-      // 设置全局角色守卫
-      provide: APP_GUARD,
-      useClass: RolesGuard,
-    },
+    // {
+    //   // 设置全局角色守卫
+    //   provide: APP_GUARD,
+    //   useClass: RolesGuard,
+    // },
   ]
 })
 export class AppModule { }

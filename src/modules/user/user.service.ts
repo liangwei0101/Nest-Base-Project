@@ -41,4 +41,14 @@ export class UserService {
     user.account = dto.account;
     return user;
   }
+
+  /**
+  * 创建用户
+  */
+  async findOne(username: string): Promise<User | undefined> {
+    const user = new User();
+    user.name = username;
+    user.password = "1";
+    return user;
+  }
 }

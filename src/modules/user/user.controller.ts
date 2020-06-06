@@ -1,17 +1,18 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
 import { AuthService } from '../../common/auth/auth.service';
 import { User } from '../../entity/user.entity';
-import { NoAuth, Roles } from 'src/common/decorator/customize';
+import { NoAuth, Roles } from '../../common/decorator/customize';
+import { LocalAuthGuard } from '../../common/auth/guards/auth.local.guard';
+import { JwtAuthGuard } from '../../common/auth/guards/jwt.auth.guard';
 
 @ApiTags('user')
 @Controller('user')
 export class UserController {
   constructor(
-    private readonly userService: UserService,
-    private readonly authService: AuthService
+    private readonly userService: UserService
   ) { }
 
   @Get()
@@ -31,12 +32,5 @@ export class UserController {
   @ApiOperation({ description: '创建用户' })
   async create(@Body() createUserDto: CreateUserDto) {
     return await this.userService.createUser(createUserDto);
-  }
-
-  @NoAuth()
-  @Post('/login')
-  @ApiOperation({ description: '用户登录' })
-  async login(@Body() loginParams: User) {
-    return this.authService.validateUser(loginParams.account, loginParams.password);
   }
 }
