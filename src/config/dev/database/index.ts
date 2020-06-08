@@ -1,10 +1,10 @@
 export default {
   type: 'mysql',
-  host: 'localhost',
+  host: '127.0.0.1',
   port: 3306,
   username: 'root',
   password: 'root',
-  database: 'consultation',
+  database: 'test',
   timezone: 'UTC',
   charset: 'utf8mb4',
   synchronize: false,

@@ -21,7 +21,7 @@ export class UserController {
   }
 
   @Post('/test')
-  // @Roles('admin')
+  @Roles('admin')
   @ApiOperation({ description: '只能是admin做这个事情' })
   async adminUpdaeData() {
     return true;

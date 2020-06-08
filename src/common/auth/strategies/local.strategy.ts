@@ -5,15 +5,20 @@ import { AuthService } from '../auth.service';
 import { CustomException } from '../../../common/httpHandle/customException';
 import { ApiErrorMessage } from '../../../common/enum/apiErrorCode';
 
+/**
+* 本地 验证
+*/
 @Injectable()
 export class LocalStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly authService: AuthService) {
-    super();
+    super({
+      usernameField: 'account',
+      passwordField: 'password'
+    });
   }
 
-  async validate(username: string, password: string): Promise<any> {
-    console.log("验证有了")
-    const user = await this.authService.validateUser(username, password);
+  async validate(account: string, password: string): Promise<any> {
+    const user = await this.authService.validateUser(account);
     if (!user) {
       throw new CustomException(
         ApiErrorMessage.USER_IS_NOT_EXIST,

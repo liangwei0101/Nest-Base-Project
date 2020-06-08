@@ -25,8 +25,7 @@ export class UserService {
   */
   async findOneByAccount(account: string) {
     const user = new User();
-    user.account = '8888';
-    user.name = 'test';
+    user.account = account;
     user.password = '1';
     return user;
     //return await this.usersRepository.findOne({ where: { account: account } });
@@ -39,16 +38,6 @@ export class UserService {
     const user = new User();
     user.name = dto.name;
     user.account = dto.account;
-    return user;
-  }
-
-  /**
-  * 创建用户
-  */
-  async findOne(username: string): Promise<User | undefined> {
-    const user = new User();
-    user.name = username;
-    user.password = "1";
     return user;
   }
 }
