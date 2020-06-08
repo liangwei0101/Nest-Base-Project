@@ -5,6 +5,7 @@ import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from './constants';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { UserModule } from '../../modules/user/user.module';
 
 describe('AuthService', () => {
   let service: AuthService;
@@ -12,6 +13,7 @@ describe('AuthService', () => {
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [
+        UserModule,
         PassportModule.register({ defaultStrategy: 'jwt' }),
         JwtModule.register({
           secret: jwtConstants.secret,
