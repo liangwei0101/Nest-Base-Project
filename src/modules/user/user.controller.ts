@@ -2,9 +2,10 @@ import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags, ApiOperation } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
-import { Roles } from '../../common/decorator/customize';
+import { Roles, CurrentUser } from '../../common/decorator/customize';
 import { AuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../../common/auth/guards/jwt.auth.guard';
+import { User } from '../../entity/user.entity';
 
 @ApiTags('user')
 @UseGuards(AuthGuard('jwt'))
@@ -16,7 +17,9 @@ export class UserController {
 
   @Get()
   @ApiOperation({ description: '获取用户列表' })
-  async userList() {
+  async userList(@CurrentUser() user: User) {
+    // user 是当前登录的用户
+    console.log(user)
     return await this.userService.getUserList();
   }
 

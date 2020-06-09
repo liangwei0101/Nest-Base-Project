@@ -9,6 +9,10 @@ import { AuthModule } from '../../common/auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from '../../common/auth/constants';
+import { LocalStrategy } from '../../common/auth/strategies/local.strategy';
+import { JwtStrategy } from '../../common/auth/strategies/jwt.strategy';
+import { AuthService } from '../../common/auth/auth.service';
+import { JwtService } from '@nestjs/jwt';
 
 describe('User Controller', () => {
   const url = '/user';
@@ -18,8 +22,18 @@ describe('User Controller', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
+      imports: [
+        PassportModule,
+        JwtModule.register({
+          secret: jwtConstants.secret,
+          signOptions: { expiresIn: '24h' },
+        }),
+      ],
       controllers: [UserController],
       providers: [
+        AuthService,
+        LocalStrategy,
+        JwtStrategy,
         UserService,
         {
           provide: getRepositoryToken(User),
