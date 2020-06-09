@@ -21,5 +21,5 @@ export class User {
 
   @Column()
   @ApiProperty({ description: '用户角色', required: true })
-  role: number
+  role: string
 }

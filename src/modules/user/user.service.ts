@@ -27,6 +27,7 @@ export class UserService {
     const user = new User();
     user.account = account;
     user.password = '1';
+    user.role = 'admin';
     return user;
     //return await this.usersRepository.findOne({ where: { account: account } });
   }

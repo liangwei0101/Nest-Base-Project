@@ -28,11 +28,11 @@ import { GlobalAuthGuard } from './common/globalGuard/auth.guard';
       provide: APP_GUARD,
       useClass: GlobalAuthGuard,
     },
-    // {
-    //   // 设置全局角色守卫
-    //   provide: APP_GUARD,
-    //   useClass: RolesGuard,
-    // },
+    {
+      // 设置全局角色守卫
+      provide: APP_GUARD,
+      useClass: RolesGuard,
+    },
   ]
 })
 export class AppModule { }

@@ -8,7 +8,6 @@ import { JwtAuthGuard } from '../../common/auth/guards/jwt.auth.guard';
 import { User } from '../../entity/user.entity';
 
 @ApiTags('user')
-@UseGuards(AuthGuard('jwt'))
 @Controller('user')
 export class UserController {
   constructor(

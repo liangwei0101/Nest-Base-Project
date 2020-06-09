@@ -6,7 +6,6 @@ import { Reflector } from '@nestjs/core';
 export class RolesGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) { }
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    console.log('------------全局角色守卫-------------------')
     const roles = this.reflector.get<string[]>('roles', context.getHandler());
     // 无角色注解时，api任何角色都能访问
     if (!roles) {
@@ -15,7 +14,6 @@ export class RolesGuard implements CanActivate {
     const request = context.switchToHttp().getRequest();
     const user = request.user;
     const hasRole = () => user.roles.some((role: string) => roles.indexOf(role) > -1);
-    console.log('hasRole', hasRole);
 
     return user && user.roles && hasRole();
   }
