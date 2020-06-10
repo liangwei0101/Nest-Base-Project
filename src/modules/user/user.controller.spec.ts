@@ -16,6 +16,7 @@ import { JwtService } from '@nestjs/jwt';
 
 describe('User Controller', () => {
   const url = '/user';
+  let jwtService: JwtService;
   let app: INestApplication;
   let userService: UserService;
   let userController: UserController;
@@ -48,6 +49,7 @@ describe('User Controller', () => {
     app = module.createNestApplication();
     await app.init();
 
+    jwtService = module.get<JwtService>(JwtService);
     userService = module.get<UserService>(UserService);
     userController = module.get<UserController>(UserController);
   });
@@ -64,25 +66,23 @@ describe('User Controller', () => {
   });
 
   it('user post', async () => {
-    const result: User = { id: "1", name: '123', account: "1234", password: "12", role: 0 };
+    const result: User = { id: "1", name: '123', account: "1234", password: "12", role: "admin" };
 
     jest.spyOn(userService, 'createUser').mockImplementation(async () => result);
     return request(app.getHttpServer())
       .post(url)
-      .send(result)
+      .send("1231321456")
       .expect(201)
       .expect(await userService.createUser({ name: '123', account: "1234" }));
   });
 
-  it('user post error', () => {
-    return request(app.getHttpServer())
-      .post('/user')
-      .send({ account: '1234' })
-      .expect(201)
-      .expect({
-        statusCode: 400,
-      });
-  });
+  // it('user post error', () => {
+  //   return request(app.getHttpServer())
+  //     .post('/user')
+  //     .send({ aa: 123132132213 })
+  //     .expect(201)
+  //     .expect(status:200, bod)
+  // });
 
   afterAll(async () => {
     await app.close();

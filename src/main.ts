@@ -10,6 +10,7 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   const options = new DocumentBuilder()
+    .addBearerAuth()
     .setTitle('Swagger API')
     .setDescription('业务API')
     .setVersion('1.0')
