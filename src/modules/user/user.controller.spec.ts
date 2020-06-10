@@ -3,9 +3,8 @@ import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
+import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '../../entity/user.entity';
-import { AuthModule } from '../../common/auth/auth.module';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
 import { jwtConstants } from '../../common/auth/constants';
@@ -13,6 +12,8 @@ import { LocalStrategy } from '../../common/auth/strategies/local.strategy';
 import { JwtStrategy } from '../../common/auth/strategies/jwt.strategy';
 import { AuthService } from '../../common/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
+import { validate  } from 'class-validator';
+import { CreateUserDto } from './userDto';
 
 describe('User Controller', () => {
   const url = '/user';
@@ -71,18 +72,31 @@ describe('User Controller', () => {
     jest.spyOn(userService, 'createUser').mockImplementation(async () => result);
     return request(app.getHttpServer())
       .post(url)
-      .send("1231321456")
       .expect(201)
       .expect(await userService.createUser({ name: '123', account: "1234" }));
   });
 
-  // it('user post error', () => {
-  //   return request(app.getHttpServer())
-  //     .post('/user')
-  //     .send({ aa: 123132132213 })
-  //     .expect(201)
-  //     .expect(status:200, bod)
-  // });
+  it('Dto is error', async () => {
+    const dto =  new CreateUserDto()
+    dto.account = "1212"
+    const errors = await validate(dto);
+    expect(errors.length).not.toBe(0);
+  });
+
+  it('user post error', (done) => {
+    request(app.getHttpServer())
+      .post('/user')
+      .send({account: '123'})
+      .expect(201)
+      .end((err, res)=> {
+        console.log(res.body)
+        if(err) {
+          return done.fail(err);
+        }
+        expect(res.body).not.toBeNull();
+        done()
+      })
+  });
 
   afterAll(async () => {
     await app.close();
