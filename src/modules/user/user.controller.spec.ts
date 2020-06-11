@@ -68,14 +68,14 @@ describe('User Controller', () => {
       .expect(await userService.getUserList());
   });
 
-  it('user post', async () => {
-    const result: User = { id: "1", name: '123', account: "1234", password: "12", role: "admin" };
-    jest.spyOn(userService, 'createUser').mockImplementation(async () => result);
-    return request(app.getHttpServer())
-      .post(url)
-      .expect(201)
-      .expect(await userService.createUser({ name: '123', account: "1234" }));
-  });
+  // it('user post', async () => {
+  //   // const result: User = { id: "1", name: '123', account: "1234", password: "12", role: "admin" };
+  //   jest.spyOn(userService, 'createUser').mockImplementation(async () => result);
+  //   return request(app.getHttpServer())
+  //     .post(url)
+  //     .expect(201)
+  //     .expect(await userService.createUser({ name: '123', account: "1234" }));
+  // });
 
   it('Dto is error', async () => {
     const dto = new CreateUserDto()
