@@ -17,13 +17,13 @@ export class UserController {
   @ApiOperation({ description: '获取用户列表' })
   async userList(@CurrentUser() user: User) {
     // user 是当前登录的用户
-    console.log(user)
+    // console.log(user)
     return await this.userService.getUserList();
   }
 
   @Post('/test')
   @Roles('admin')
-  @ApiOperation({ description: '只能是admin做这个事情' })
+  @ApiOperation({ description: '只能是admin访问这个路由' })
   async adminUpdaeData() {
     return true;
   }

@@ -12,7 +12,7 @@ import { LocalStrategy } from '../../common/auth/strategies/local.strategy';
 import { JwtStrategy } from '../../common/auth/strategies/jwt.strategy';
 import { AuthService } from '../../common/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
-import { validate  } from 'class-validator';
+import { validate } from 'class-validator';
 import { CreateUserDto } from './userDto';
 
 describe('User Controller', () => {
@@ -68,7 +68,6 @@ describe('User Controller', () => {
 
   it('user post', async () => {
     const result: User = { id: "1", name: '123', account: "1234", password: "12", role: "admin" };
-
     jest.spyOn(userService, 'createUser').mockImplementation(async () => result);
     return request(app.getHttpServer())
       .post(url)
@@ -77,25 +76,10 @@ describe('User Controller', () => {
   });
 
   it('Dto is error', async () => {
-    const dto =  new CreateUserDto()
+    const dto = new CreateUserDto()
     dto.account = "1212"
     const errors = await validate(dto);
     expect(errors.length).not.toBe(0);
-  });
-
-  it('user post error', (done) => {
-    request(app.getHttpServer())
-      .post('/user')
-      .send({account: '123'})
-      .expect(201)
-      .end((err, res)=> {
-        console.log(res.body)
-        if(err) {
-          return done.fail(err);
-        }
-        expect(res.body).not.toBeNull();
-        done()
-      })
   });
 
   afterAll(async () => {
