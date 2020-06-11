@@ -15,7 +15,7 @@ export class UserController {
 
   @Get()
   @ApiOperation({ description: '获取用户列表' })
-  async userList(@CurrentUser() user: User) {
+  async userList() {
     // user 是当前登录的用户
     // console.log(user)
     return await this.userService.getUserList();

@@ -1,5 +1,5 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, BadRequestException } from '@nestjs/common';
 import * as request from 'supertest';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
@@ -7,13 +7,15 @@ import { getRepositoryToken } from '@nestjs/typeorm';
 import { User } from '../../entity/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
-import { jwtConstants } from '../../common/auth/constants';
-import { LocalStrategy } from '../../common/auth/strategies/local.strategy';
-import { JwtStrategy } from '../../common/auth/strategies/jwt.strategy';
-import { AuthService } from '../../common/auth/auth.service';
+import { jwtConstants } from '../../common/specialModules/auth/constants';
+import { LocalStrategy } from '../../common/specialModules/auth/strategies/local.strategy';
+import { JwtStrategy } from '../../common/specialModules/auth/strategies/jwt.strategy';
+import { AuthService } from '../../common/specialModules/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { validate } from 'class-validator';
 import { CreateUserDto } from './userDto';
+import { CustomException } from '../../common/httpHandle/customException';
+import { ApiErrorMessage } from '../../common/enum/apiErrorCode';
 
 describe('User Controller', () => {
   const url = '/user';
