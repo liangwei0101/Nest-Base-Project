@@ -1,5 +1,5 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from "@nestjs/common"
-import { AuthService } from "../auth/auth.service"
+import { AuthService } from "../specialModules/auth/auth.service"
 
 /**
 * 设置已登录用户在 request 中

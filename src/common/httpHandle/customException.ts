@@ -1,5 +1,8 @@
 import { HttpException, HttpStatus } from "@nestjs/common";
 
+/**
+* 自定义异常
+*/
 export class CustomException extends HttpException {
 
   private errorMessage: string;

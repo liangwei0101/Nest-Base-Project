@@ -2,8 +2,8 @@ import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
 import { AuthGuard, IAuthGuard } from '@nestjs/passport';
-import { JwtAuthGuard } from '../auth/guards/jwt.auth.guard';
-import { LocalAuthGuard } from '../auth/guards/auth.local.guard';
+import { JwtAuthGuard } from '../specialModules/auth/guards/jwt.auth.guard';
+import { LocalAuthGuard } from '../specialModules/auth/guards/auth.local.guard';
 
 @Injectable()
 export class GlobalAuthGuard implements CanActivate {

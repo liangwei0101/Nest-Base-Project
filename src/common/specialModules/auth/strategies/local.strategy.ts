@@ -2,8 +2,8 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { AuthService } from '../auth.service';
-import { CustomException } from '../../../common/httpHandle/customException';
-import { ApiErrorMessage } from '../../../common/enum/apiErrorCode';
+import { CustomException } from '../../../httpHandle/customException';
+import { ApiErrorMessage } from '../../../enum/apiErrorCode';
 
 /**
 * 本地 验证
