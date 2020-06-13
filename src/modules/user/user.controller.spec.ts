@@ -3,7 +3,7 @@ import { INestApplication, BadRequestException } from '@nestjs/common';
 import * as request from 'supertest';
 import { UserController } from './user.controller';
 import { UserService } from './user.service';
-import { getRepositoryToken } from '@nestjs/typeorm';
+import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { User } from '../../entity/user.entity';
 import { PassportModule } from '@nestjs/passport';
 import { JwtModule } from '@nestjs/jwt';
@@ -14,8 +14,6 @@ import { AuthService } from '../../common/specialModules/auth/auth.service';
 import { JwtService } from '@nestjs/jwt';
 import { validate } from 'class-validator';
 import { CreateUserDto } from './userDto';
-import { CustomException } from '../../common/httpHandle/customException';
-import { ApiErrorMessage } from '../../common/enum/apiErrorCode';
 
 describe('User Controller', () => {
   const url = '/user';
@@ -32,6 +30,7 @@ describe('User Controller', () => {
           secret: jwtConstants.secret,
           signOptions: { expiresIn: '24h' },
         }),
+        TypeOrmModule.forFeature([User])
       ],
       controllers: [UserController],
       providers: [
@@ -68,14 +67,9 @@ describe('User Controller', () => {
       .expect(await userService.getUserList());
   });
 
-  // it('user post', async () => {
-  //   // const result: User = { id: "1", name: '123', account: "1234", password: "12", role: "admin" };
-  //   jest.spyOn(userService, 'createUser').mockImplementation(async () => result);
-  //   return request(app.getHttpServer())
-  //     .post(url)
-  //     .expect(201)
-  //     .expect(await userService.createUser({ name: '123', account: "1234" }));
-  // });
+  it('user post', async () => {
+    
+  });
 
   it('Dto is error', async () => {
     const dto = new CreateUserDto()

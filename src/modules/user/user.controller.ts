@@ -1,9 +1,11 @@
-import { Controller, Get, Post, Body, UseGuards } from '@nestjs/common';
+import { Controller, Get, Post, Request } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
-import { Roles, CurrentUser } from '../../common/decorator/customize';
+import { Roles, CurrentUser, NoAuth } from '../../common/decorator/customize';
 import { User } from '../../entity/user.entity';
+import { Paginations } from '../../common/decorator/pagination';
+import { IPagination } from '../../common/specialModules/pagination';
 
 @ApiTags('user')
 @ApiBearerAuth()
@@ -14,11 +16,10 @@ export class UserController {
   ) { }
 
   @Get()
+  @NoAuth()
   @ApiOperation({ description: '获取用户列表' })
-  async userList() {
-    // user 是当前登录的用户
-    // console.log(user)
-    return await this.userService.getUserList();
+  async userList(@Paginations() paginationDto: IPagination) {
+    return await this.userService.getUserList(paginationDto);
   }
 
   @Post('/test')
@@ -29,8 +30,9 @@ export class UserController {
   }
 
   @Post()
+  @NoAuth()
   @ApiOperation({ description: '创建用户' })
-  async create(@Body() createUserDto: CreateUserDto) {
-    return await this.userService.createUser(createUserDto);
+  async create() {
+    return await this.userService.createUser();
   }
 }

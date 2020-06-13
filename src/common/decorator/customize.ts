@@ -1,7 +1,7 @@
 import { SetMetadata, createParamDecorator, ExecutionContext } from '@nestjs/common'
 
 /**
-* 接口是否要验证
+* 接口不用验证
 */
 export const NoAuth = () => SetMetadata('no-auth', true);
 
@@ -24,3 +24,4 @@ export const CurrentUser = createParamDecorator(
     return request.user;
   },
 );
+
