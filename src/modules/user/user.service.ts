@@ -5,6 +5,7 @@ import { User, AccountType } from '../../entity/user.entity';
 import { createSomeDigitNumber } from '../../common/utils/stringUtil';
 import { getnowTimeStrStampStr } from '../../common/utils/dateUtil';
 import { IPagination, Pagination } from '../../common/specialModules/pagination';
+import { createFieldSql, createCompareTimeSql } from '../../common/utils/typeormUtil';
 
 @Injectable()
 export class UserService {
@@ -16,15 +17,24 @@ export class UserService {
    * 获取用户
    */
   async getUserList(pagination: IPagination, filter: any = {}) {
-    let inviteCode = filter.inviteCode;
+    const inviteCode = filter.inviteCode;
+    const startTime = filter.startTime;
+    const endTime = filter.endTime;
 
-    const [results, total] = await getRepository(User)
+    const inviteCodeSql = createFieldSql("inviteCode", inviteCode);
+    const timeSql = createCompareTimeSql(startTime, endTime);
+
+    const query = getRepository(User)
       .createQueryBuilder('user')
-      .andWhere(inviteCode ? `inviteCode like :inviteCode` : '1=1', { inviteCode: `%${inviteCode}%` })
+      .andWhere(inviteCodeSql.sqlStr, inviteCodeSql.value)
+      .andWhere(timeSql.sqlStr, timeSql.value)
       .take(pagination.limit)
       .skip(pagination.page)
-      .orderBy('user.createTime', 'ASC')
-      .getManyAndCount();
+      .orderBy('user.createTime', 'ASC');
+
+    console.log(query.getSql())
+
+    const [results, total] = await query.getManyAndCount();
 
     return new Pagination<User>({ results, total });
   }
