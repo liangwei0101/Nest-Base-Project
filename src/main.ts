@@ -4,8 +4,8 @@ import * as rateLimit from 'express-rate-limit';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { TransformInterceptor } from './common/httpHandle/transform.interceptor';
 import { HttpExceptionFilter } from './common/httpHandle/httpException';
-import { TimeoutInterceptor } from './common/interceptor/timeout.interceptor';
 import { ValidationPipeConfig } from './common/pipe/validationPipe';
+import { TimeoutInterceptor } from './common/httpHandle/timeout.interceptor';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
