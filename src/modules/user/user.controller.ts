@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Request } from '@nestjs/common';
+import { Controller, Get, Post, Request, Body } from '@nestjs/common';
 import { UserService } from './user.service';
 import { ApiTags, ApiOperation, ApiBearerAuth } from '@nestjs/swagger';
 import { CreateUserDto } from './userDto';
@@ -8,7 +8,6 @@ import { Paginations } from '../../common/decorator/pagination';
 import { IPagination } from '../../common/specialModules/pagination';
 
 @ApiTags('user')
-@ApiBearerAuth()
 @Controller('user')
 export class UserController {
   constructor(
@@ -32,7 +31,8 @@ export class UserController {
   @Post()
   @NoAuth()
   @ApiOperation({ description: '创建用户' })
-  async create() {
+  async create(@Body() userDto: CreateUserDto) {
+    console.log(userDto);
     return await this.userService.createUser();
   }
 }

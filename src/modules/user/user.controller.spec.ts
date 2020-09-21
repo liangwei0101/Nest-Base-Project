@@ -67,10 +67,6 @@ describe('User Controller', () => {
       .expect(await userService.getUserList());
   });
 
-  it('user post', async () => {
-    
-  });
-
   it('Dto is error', async () => {
     const dto = new CreateUserDto()
     dto.account = "1212"

@@ -1,11 +1,11 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
-import { ValidationPipe } from '@nestjs/common';
 import * as rateLimit from 'express-rate-limit';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 import { TransformInterceptor } from './common/httpHandle/transform.interceptor';
 import { HttpExceptionFilter } from './common/httpHandle/httpException';
 import { TimeoutInterceptor } from './common/interceptor/timeout.interceptor';
+import { ValidationPipeConfig } from './common/pipe/validationPipe';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -28,7 +28,7 @@ async function bootstrap() {
   );
 
   // 全局使用管道
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipeConfig());
 
   // 全局范围内使用异常过滤器
   app.useGlobalFilters(new HttpExceptionFilter());
