@@ -8,6 +8,6 @@ export const encryptPassword = (password: string): string => {
     return '';
   }
   const md5 = crypto.createHash('md5');
-  const newPassword = md5.update(password).digest('hex');
+  const newPassword = md5.update(password).digest('base64');
   return newPassword;
 }
