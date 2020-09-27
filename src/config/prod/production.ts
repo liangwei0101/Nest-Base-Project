@@ -1,3 +1,5 @@
+import redis from './redis/index';
+
 export default {
   // 端口
   port: parseInt(process.env.PORT, 10) || 3000,
@@ -17,4 +19,6 @@ export default {
     synchronize: false,
     logging: true,
   },
+  // redis 配置
+  redis: redis,
 };

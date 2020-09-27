@@ -1,4 +1,5 @@
 import database from './database/index';
+import redis from './redis/index';
 
 export default {
   // 端口
@@ -7,4 +8,6 @@ export default {
   enableSwagger: true,
   // 数据库配置
   DATABASE_CONFIG: database,
+  // redis 配置
+  redis: redis,
 };
