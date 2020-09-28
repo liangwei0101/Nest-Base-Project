@@ -1,7 +1,7 @@
-import { Controller, Get, Post, Request, Body, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body, Put } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto, SignUpStep1Dto } from './userDto';
-import { NoAuth, CurrentUser, Roles } from '../../common/decorator/customize';
+import { CreateUserDto } from './userDto';
+import { NoAuth, CurrentUser } from '../../common/decorator/customize';
 import { User } from '../../entity/user/user.entity';
 import { Pagination } from '../../common/decorator/pagination';
 import { IPagination } from '../../common/class/pagination';
@@ -22,8 +22,7 @@ export class UserController {
   //@ApiResponse({ status: 200, type: User })
   //@ApiOperation({ description: '获取用户信息' })
   async getUserInfo(@CurrentUser() user: User) {
-    console.log(user);
-    return await this.userService.getOneUserInfo('5d89d2eb618cf9344e539d01');
+    return null;
   }
 
   @Post('/test')
@@ -66,37 +65,4 @@ export class UserController {
     }
     return true;
   }
-
-  //#region  新 API
-
-  @NoAuth()
-  @Post('/sign-up-step1')
-  // @ApiOperation({ description: '注册第一步' })
-  async signUpStep1(@Body() userDto: SignUpStep1Dto) {
-    const user = new User();
-    Object.assign(user, userDto);
-    return this.userService.signUpStep1(user);
-  }
-
-  @Post('/sign-up-step2')
-  // @ApiOperation({ description: '注册第二步(KYC系统已完成)' })
-  async signUpStep2(@Body() user: User) {
-    return this.userService.signUpStep2(user);
-  }
-
-  @Post('/sign-up-step3')
-  // @ApiOperation({ description: '注册第二步(KYC系统已完成)' })
-  async signUpStep3(@Body() user: User) {
-    return this.userService.signUpStep3(user);
-  }
-
-  @Put()
-  @Roles('admin')
-  // @ApiResponse({ status: 200, type: User })
-  // @ApiOperation({ description: '更新用户管理人' })
-  async updateUserManageUserId(merchantsId: string, manageId: string) {
-    return await this.userService.updateUserManageUserId(merchantsId, manageId);
-  }
-
-  //#endregion
 }
