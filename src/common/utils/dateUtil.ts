@@ -21,7 +21,7 @@ export const getSomeMonthEndDate = (date = new Date()): Date => {
 /**
   * 获取当前时间的时间戳的字符串
   */
-export const getnowTimeStrStampStr = () => {
+export const getNowTimeStrStampStr = () => {
   let nowTimeStr = '';
 
   const now = new Date(Date.now());

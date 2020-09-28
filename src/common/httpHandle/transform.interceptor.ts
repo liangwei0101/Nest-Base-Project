@@ -1,5 +1,5 @@
 import { Injectable, NestInterceptor, CallHandler, ExecutionContext } from '@nestjs/common';
-import { map } from 'rxjs/operators';
+import { map, switchMap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 interface Response<T> {

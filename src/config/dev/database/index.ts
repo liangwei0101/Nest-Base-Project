@@ -1,13 +1,14 @@
 export default {
   type: 'postgres',
-  host: '127.0.0.1',
+  host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'root',
-  database: 'test',
+  password: 'postgres',
+  database: 'postgres',
   timezone: 'UTC',
   charset: 'utf8mb4',
-  synchronize: false,
+  synchronize: true,
   logging: false,
-  entities: [__dirname + '/../../../entity/**.entity.{ts,js}',__dirname + '/../../../entity/**/**.entity.{ts,js}'],
+  autoLoadEntities: true,
+  // subscribers: [__dirname + '/../../../modules/**/*.hook.{ts,js}']
 };

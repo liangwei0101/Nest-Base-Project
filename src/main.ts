@@ -1,14 +1,30 @@
+declare const module: any;
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import * as rateLimit from 'express-rate-limit';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { TransformInterceptor } from './common/httpHandle/transform.interceptor';
-import { HttpExceptionFilter } from './common/httpHandle/httpException';
 import { ValidationPipeConfig } from './common/pipe/validationPipe';
+import { HttpExceptionFilter } from './common/httpHandle/httpException';
+import { TransformInterceptor } from './common/httpHandle/transform.interceptor';
 import { TimeoutInterceptor } from './common/httpHandle/timeout.interceptor';
+import * as bodyParser from 'body-parser';
+import { getConnection } from 'typeorm';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  app.enableCors();
+  await app.listen(3000);
+
+  // 热重载
+  if (module.hot) {
+    module.hot.accept();
+    module.hot.dispose(async () => {
+      await getConnection().close();
+      await app.close();
+    });
+  }
+
+  // app.setGlobalPrefix('/core');
 
   const options = new DocumentBuilder()
     .addBearerAuth()
@@ -23,7 +39,7 @@ async function bootstrap() {
   app.use(
     rateLimit({
       windowMs: 15 * 60 * 1000, // 15 minutes
-      max: 500, // limit each IP to 500 requests per windowMs
+      max: 5000, // limit each IP to 500 requests per windowMs
     }),
   );
 
@@ -39,6 +55,9 @@ async function bootstrap() {
   // 全局使用超时拦截
   app.useGlobalInterceptors(new TimeoutInterceptor());
 
-  await app.listen(3000);
+  app.use(bodyParser.json({ limit: '50mb' }));
+  app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
+
+  console.log('application is start :' + 3000);
 }
 bootstrap();

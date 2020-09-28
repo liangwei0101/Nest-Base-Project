@@ -1,6 +1,7 @@
-import { ArgumentMetadata, Injectable, PipeTransform, BadRequestException } from '@nestjs/common';
+import { ArgumentMetadata, Injectable, PipeTransform, HttpStatus } from '@nestjs/common';
 import { validate } from 'class-validator';
 import { plainToClass } from 'class-transformer';
+import { CustomException } from '../httpHandle/customException';
 
 @Injectable()
 export class ValidationPipeConfig implements PipeTransform<any> {
@@ -11,7 +12,14 @@ export class ValidationPipeConfig implements PipeTransform<any> {
     const object = plainToClass(metatype, value);
     const errors = await validate(object);
     if (errors.length > 0) {
-      throw new BadRequestException(errors);
+      const errorMessageList = []
+      const errorsObj = errors[0].constraints
+      for (const key in errorsObj) {
+        if (errorsObj.hasOwnProperty(key)) {
+          errorMessageList.push(errorsObj[key])
+        }
+      }
+      throw new CustomException(errorMessageList, HttpStatus.BAD_REQUEST);
     }
     return value;
   }
