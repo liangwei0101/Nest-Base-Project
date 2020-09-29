@@ -109,7 +109,7 @@ export const orderParamsHandle = (tableAliasName: string, params: any) => {
  * @param queryParams 前端传递参数
  * @param customCondition 自定义条件
  */
-export const generalList = async <T>(T: any, talbeName: string, queryParams: IQueryParams, customCondition: FindConditions<T>) => {
+export const generalList = async <T>(T: any, talbeName: string, queryParams: IQueryParams, customCondition: FindConditions<T>): Promise<Pagination<T>> => {
   // 时间参数处理
   timeParamsHandle(customCondition, queryParams.filter);
   // 排序参数处理
