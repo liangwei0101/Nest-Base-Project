@@ -4,9 +4,6 @@ import { User } from '../../entity/user/user.entity';
 import { TestingModule, Test } from '@nestjs/testing';
 import { getRepositoryToken, TypeOrmModule } from '@nestjs/typeorm';
 import { DatabaseModule } from '../../common/special-modules/database/database.module';
-import { BalanceModule } from '../balance/balance.module';
-import { InviteCodeModule } from '../invite-code/invite-code.module';
-import { DatabaseService } from '../../common/special-modules/database/database.service';
 import { INestApplication } from '@nestjs/common';
 
 // export async function createConnect() {
@@ -49,7 +46,7 @@ describe('UserService', () => {
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      imports: [DatabaseModule, BalanceModule, InviteCodeModule, TypeOrmModule.forFeature([User])],
+      imports: [DatabaseModule, TypeOrmModule.forFeature([User])],
       providers: [UserService],
     }).compile();
 
@@ -66,7 +63,7 @@ describe('UserService', () => {
   describe('createUser', () => {
     it('createUser', async () => {
       const user = await service.createUser();
-      expect(user.nickname).toEqual('梁二狗');
+      expect(user.name).toEqual('梁二狗');
       await repo.remove(user);
     });
   });
