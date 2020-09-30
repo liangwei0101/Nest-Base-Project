@@ -23,7 +23,7 @@ export class User extends NoIdBase {
   phone: string;
 
   @Column({ comment: '角色id', nullable: true })
-  roleId: string;
+  roleNo: string;
 
   @Column({ default: false, comment: '是否锁定' })
   locked: boolean;
@@ -33,6 +33,4 @@ export class User extends NoIdBase {
   email: string;
 
   rolesList: string[];
-
-  //#endregion
 }
