@@ -10,9 +10,11 @@ import { ObjectType, Field } from '@nestjs/graphql';
 export class UserConfig extends Base {
 
   @Index()
+  @Field({ nullable: true })
   @Column({ comment: '用户id' })
   userId: string;
 
+  @Field({ nullable: true })
   @Column({ type: 'boolean', default: false, comment: '是否开通极速换汇' })
   ableTrade: boolean;
 }

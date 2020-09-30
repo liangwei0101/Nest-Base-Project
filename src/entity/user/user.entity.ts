@@ -8,7 +8,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 @Entity('user')
 export class User extends NoIdBase {
-  @Field({ nullable: true, description: '我是测试' })
+  @Field({ nullable: true, description: 'id' })
   @PrimaryColumn()
   id: string;
 
@@ -22,12 +22,15 @@ export class User extends NoIdBase {
   @Column({ comment: '手机号码', nullable: true })
   phone: string;
 
+  @Field({ nullable: true })
   @Column({ comment: '角色id', nullable: true })
   roleNo: string;
 
+  @Field({ nullable: true })
   @Column({ default: false, comment: '是否锁定' })
   locked: boolean;
 
+  @Field({ nullable: true })
   @Index({ unique: true })
   @Column({ comment: '邮箱', nullable: true })
   email: string;
