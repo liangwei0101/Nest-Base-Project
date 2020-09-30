@@ -17,24 +17,14 @@ import { INestApplication } from '@nestjs/common';
 //   });
 // }
 
-// const user = {
-//   id: '2020-0620-1525-45106',
-//   createTime: '2020-06-20T07:25:45.116Z',
-//   updateTime: '2020-06-20T07:25:45.116Z',
-//   phone: '18770919134',
-//   locked: false,
-//   role: '300',
-//   nickname: '梁二狗',
-//   verifiedName: '梁伟',
-//   email: '272262983@qq.com',
-//   inviteCode: '538003',
-//   inviteId: null,
-//   manageUserId: null,
-//   accountType: 'corp_mainland',
-//   userSource: '123456',
-//   signUpProgress: 1,
-//   remarks: null,
-// };
+const user = new User();
+user.name = '梁二狗';
+user.email = '272262983@qq.com';
+user.remarks = 'remarks';
+user.roleNo = '300';
+user.locked = false;
+user.phone = '18770919134';
+export { user };
 
 // const userArray = [[user], 1];
 
@@ -72,9 +62,9 @@ describe('UserService', () => {
     it('分页', async () => {
       const page = { page: 0, limit: 10 };
       const user = await service.createUser();
-      const res = await service.getUserList(page);
-      expect(res.count).toEqual(1);
-      expect(res.list[0]).toEqual(user.id);
+      const res = await service.getUserList(null);
+      expect(res.pageTotal).toBeGreaterThan(1);
+      expect(res.data[0].id).toEqual(user.id);
       await repo.remove(user);
     });
     // it('分页', async () => {
