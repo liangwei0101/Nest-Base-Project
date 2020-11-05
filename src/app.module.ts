@@ -7,7 +7,6 @@ import { RolesGuard } from './common/globalGuard/roles.guard';
 import { DatabaseModule } from './common/special-modules/database/database.module';
 import { HealthCheckModule } from './common/special-modules/health-check/healthCheck.module';
 import { RedisModule } from './common/special-modules/redis/redis.module';
-import { SystemConfigModule } from './modules/system-config/system-config.module';
 import { UserModule } from './modules/user/user.module';
 
 @Module({
@@ -21,7 +20,6 @@ import { UserModule } from './modules/user/user.module';
     RedisModule,
     DatabaseModule,
     HealthCheckModule,
-    SystemConfigModule,
   ],
   providers: [
     // {

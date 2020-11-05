@@ -8,7 +8,7 @@ import { Field, Int, ObjectType } from '@nestjs/graphql';
 @ObjectType()
 @Entity('user')
 export class User extends NoIdBase {
-  @Field({ nullable: true, description: 'id' })
+  @Field({ nullable: true, description: '我是id' })
   @PrimaryColumn()
   id: string;
 
