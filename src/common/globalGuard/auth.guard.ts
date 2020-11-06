@@ -1,7 +1,7 @@
 import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
-import { AuthGuard, IAuthGuard } from '@nestjs/passport';
+import { IAuthGuard } from '@nestjs/passport';
 import { JwtAuthGuard } from '../special-modules/auth/guards/jwt.auth.guard';
 import { LocalAuthGuard } from '../special-modules/auth/guards/auth.local.guard';
 
@@ -9,12 +9,6 @@ import { LocalAuthGuard } from '../special-modules/auth/guards/auth.local.guard'
 export class GlobalAuthGuard implements CanActivate {
   constructor(private readonly reflector: Reflector) {}
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
-    // 获取
-    const request: Request = context.switchToHttp().getRequest();
-    if (request.url.indexOf('/status') > -1) {
-      return true;
-    }
-
     // 获取登录的注解
     const loginAuth = this.reflector.get<boolean>('login-auth', context.getHandler());
 

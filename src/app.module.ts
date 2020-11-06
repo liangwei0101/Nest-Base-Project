@@ -8,6 +8,8 @@ import { DatabaseModule } from './common/special-modules/database/database.modul
 import { HealthCheckModule } from './common/special-modules/health-check/healthCheck.module';
 import { RedisModule } from './common/special-modules/redis/redis.module';
 import { UserModule } from './modules/user/user.module';
+import { GlobalAuthGuard } from './common/globalGuard/auth.guard';
+import { ComplexityPlugin } from './common/plugin/graphql.complexity';
 
 @Module({
   imports: [
@@ -22,16 +24,17 @@ import { UserModule } from './modules/user/user.module';
     HealthCheckModule,
   ],
   providers: [
-    // {
-    //   // 设置全局守卫
-    //   provide: APP_GUARD,
-    //   useClass: GraphqlGuard,
-    // },
     {
-      // 设置全局角色守卫
+      // 设置全局守卫
       provide: APP_GUARD,
-      useClass: RolesGuard,
+      useClass: GlobalAuthGuard,
     },
+    // {
+    //   // 设置全局角色守卫
+    //   provide: APP_GUARD,
+    //   useClass: RolesGuard,
+    // },
+    ComplexityPlugin
   ],
   controllers: [],
 })

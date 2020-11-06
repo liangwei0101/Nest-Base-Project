@@ -2,6 +2,7 @@ import { Injectable, CanActivate, ExecutionContext } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { Reflector } from '@nestjs/core';
 import { User } from '../../entity/user/user.entity';
+import { GqlExecutionContext } from '@nestjs/graphql';
 
 @Injectable()
 export class RolesGuard implements CanActivate {
@@ -12,8 +13,18 @@ export class RolesGuard implements CanActivate {
     if (!roles) {
       return true;
     }
-    const request = context.switchToHttp().getRequest();
-    const user: User = request.user;
+
+    let user: User;
+    const restfulRequest = context.switchToHttp().getRequest();
+    const ctx = GqlExecutionContext.create(context);
+    const graphqlRequest = ctx.getContext().req;
+    if (restfulRequest) {
+      // restful
+      user = restfulRequest.user;
+    } else if (graphqlRequest) {
+      // graphql
+      user = graphqlRequest.user;
+    }
 
     const hasRole = () => user.rolesList.some((role: string) => roles.indexOf(role) > -1);
 

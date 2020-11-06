@@ -1,9 +1,8 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
 import { Strategy } from 'passport-local';
 import { AuthService } from '../auth.service';
 import { CustomException } from '../../../httpHandle/customException';
-import { ApiError } from '../../../enum/apiErrorCode';
 
 /**
  * 本地 验证
@@ -30,14 +29,14 @@ export class LocalStrategy extends PassportStrategy(Strategy) {
   async validate(account: string, password: string): Promise<any> {
     let { user, role } = await this.authService.validateUserAccount(account);
     if (!user) {
-      throw new CustomException(ApiError.USER_IS_NOT_EXIST, ApiError.USER_IS_NOT_EXIST_CODE);
+      throw new CustomException('USER_IS_NOT_EXIST', HttpStatus.FORBIDDEN);
     }
 
     user = await this.authService.validateUserAccountAndPasswd(account, password);
     if (!user) {
-      throw new CustomException(ApiError.USER_PASSWORD_IS_ERROR, ApiError.USER_PASSWORD_IS_ERROR_CODE);
+      throw new CustomException('USER_PASSWORD_IS_ERROR', HttpStatus.FORBIDDEN);
     }
-    user.rolesList.push(role.name);
+    user.rolesList.push(role);
     return user;
   }
 }
