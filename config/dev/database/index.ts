@@ -4,10 +4,10 @@ export default {
   port: 5432,
   username: 'postgres',
   password: 'root',
-  database: 'test',
+  database: 'postgres',
   timezone: 'UTC',
   charset: 'utf8mb4',
   synchronize: false,
   logging: false,
-  entities: [__dirname + '/../../../entity/**.entity.{ts,js}',__dirname + '/../../../entity/**/**.entity.{ts,js}'],
+  autoLoadEntities: true
 };
