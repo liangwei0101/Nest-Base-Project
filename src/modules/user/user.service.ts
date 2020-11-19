@@ -9,8 +9,6 @@ import { encryptPassword } from '../../common/utils/cryptogramUtil';
 import { UserConfig } from '../../entity/user/user.config.entity';
 import { RoleEnum } from '../../common/enum/role.enum';
 import { CustomException } from '../../common/httpHandle/customException';
-import DataLoader = require('dataloader');
-import { v4 as uuid } from 'uuid';
 import { UserInput } from './userDto';
 import { updateObjectPartField } from '../../common/utils/objectUtil';
 import { IQueryParams } from '../../common/interface/IQueryParams';
@@ -26,7 +24,7 @@ export class UserService {
   /**
    * 获取用户
    */
-  async getUserList(queryParams: IQueryParams) {
+  async getUserList(queryParams: IQueryParams): Promise<Pagination<User>> {
     const tableOtherName = 'user';
     const condition: any = {};
     // 时间参数处理
@@ -41,15 +39,6 @@ export class UserService {
       .getManyAndCount();
 
     return new Pagination<User>({ data, total });
-  }
-
-  /**
-   * 获取用户条数
-   */
-  async getUserListCount(filter: JSON) {
-    const condition: any = {};
-    timeParamsHandle(condition, filter);
-    return await this.usersRepository.count(condition);
   }
 
   /**
@@ -77,7 +66,7 @@ export class UserService {
   /**
    * 创建新用户
    */
-  async createNewUser() {
+  async createNewUser(): Promise<User> {
     const user = new User();
     user.name = '梁二狗111';
     user.phone = createSomeDigitNumber(6);
@@ -90,7 +79,7 @@ export class UserService {
   /**
    * 创建用户
    */
-  async createUser() {
+  async createUser(): Promise<User> {
     const user = new User();
     user.name = '梁二狗';
     user.phone = createSomeDigitNumber(6);

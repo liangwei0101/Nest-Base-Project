@@ -7,7 +7,7 @@ export default {
   database: 'postgres',
   timezone: 'UTC',
   charset: 'utf8mb4',
-  synchronize: false,
+  synchronize: true,
   logging: false,
   autoLoadEntities: true,
 };

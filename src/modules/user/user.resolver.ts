@@ -8,6 +8,8 @@ import { UserConfig } from 'src/entity/user/user.config.entity';
 import { Loader } from 'nestjs-dataloader';
 import DataLoader from 'dataloader';
 import { UserConfigDataLoader } from '../data-loader/user-config.data-loader';
+import { NoAuth } from '../../common/decorator/customize';
+
 
 @Resolver(User)
 // @UseGuards(GqlRolesGuard)
@@ -16,9 +18,11 @@ export class UserResolver {
 
   //#region Query
 
+  @NoAuth()
   @Query(() => [User], { description: '查询用户列表' })
   async users(@Args('queryParams') { filter, order, pagination }: QueryParams) {
-    return await this.userService.getUserList({ pagination, filter, order });
+    const res = await this.userService.getUserList({ pagination, filter, order });
+    return res.data;
   }
 
   //#region 子域查询
