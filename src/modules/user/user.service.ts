@@ -1,17 +1,14 @@
-import { Injectable, Put, HttpStatus } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { InjectRepository, InjectConnection } from '@nestjs/typeorm';
 import { Repository, createQueryBuilder, Connection } from 'typeorm';
+import { UserInput } from './userDto';
 import { User } from '../../entity/user/user.entity';
-import { orderParamsHandle, timeParamsHandle } from '../../common/utils/typeormUtil';
-import { IPagination, Pagination } from '../../common/class/pagination';
+import { Pagination } from '../../common/class/pagination';
+import { IQueryParams } from '../../common/interface/IQueryParams';
 import { createSomeDigitNumber } from '../../common/utils/stringUtil';
 import { encryptPassword } from '../../common/utils/cryptogramUtil';
-import { UserConfig } from '../../entity/user/user.config.entity';
-import { RoleEnum } from '../../common/enum/role.enum';
-import { CustomException } from '../../common/httpHandle/customException';
-import { UserInput } from './userDto';
 import { updateObjectPartField } from '../../common/utils/objectUtil';
-import { IQueryParams } from '../../common/interface/IQueryParams';
+import { orderParamsHandle, timeParamsHandle } from '../../common/utils/typeormUtil';
 
 @Injectable()
 export class UserService {

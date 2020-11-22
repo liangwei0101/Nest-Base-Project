@@ -1,15 +1,14 @@
-import { UserService } from './user.service';
-import { User } from '../../entity/user/user.entity';
 import { Args, Query, Resolver, Mutation, Parent, ResolveField } from '@nestjs/graphql';
-import { UserInput, UsersOutput } from './userDto';
-import { QueryParams } from '../../common/class/graphql/query.param';
-import { UserConfig } from 'src/entity/user/user.config.entity';
 import { Loader } from 'nestjs-dataloader';
 import DataLoader from 'dataloader';
-import { UserConfigDataLoader } from '../data-loader/user-config.data-loader';
+import { UserService } from './user.service';
+import { UserInput, UsersOutput } from './userDto';
+import { User } from '../../entity/user/user.entity';
 import { NoAuth } from '../../common/decorator/customize';
 import { generalList } from '../../common/utils/typeormUtil';
-
+import { UserConfig } from '../../entity/user/user.config.entity';
+import { QueryParams } from '../../common/class/graphql/query.param';
+import { UserConfigDataLoader } from '../data-loader/user-config.data-loader';
 
 @Resolver(User)
 // @UseGuards(GqlRolesGuard)

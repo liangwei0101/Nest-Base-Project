@@ -3,7 +3,6 @@ import { APP_GUARD } from '@nestjs/core';
 import GraphQLJSON from 'graphql-type-json';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ScheduleModule } from '@nestjs/schedule';
-import { RolesGuard } from './common/globalGuard/roles.guard';
 import { DatabaseModule } from './common/special-modules/database/database.module';
 import { HealthCheckModule } from './common/special-modules/health-check/healthCheck.module';
 import { RedisModule } from './common/special-modules/redis/redis.module';

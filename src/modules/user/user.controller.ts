@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { UserService } from './user.service';
-import { NoAuth, CurrentUser } from '../../common/decorator/customize';
 import { User } from '../../entity/user/user.entity';
-import { Pagination } from '../../common/decorator/pagination';
 import { IPagination } from '../../common/class/pagination';
+import { Pagination } from '../../common/decorator/pagination';
+import { NoAuth, CurrentUser } from '../../common/decorator/customize';
 
 @Controller('user')
 export class UserController {
