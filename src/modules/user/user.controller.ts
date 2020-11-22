@@ -1,6 +1,5 @@
-import { Controller, Get, Post, Body, Put } from '@nestjs/common';
+import { Controller, Get, Post, Body } from '@nestjs/common';
 import { UserService } from './user.service';
-import { CreateUserDto } from './userDto';
 import { NoAuth, CurrentUser } from '../../common/decorator/customize';
 import { User } from '../../entity/user/user.entity';
 import { Pagination } from '../../common/decorator/pagination';
@@ -45,13 +44,6 @@ export class UserController {
   //   async create() {
   //     return await this.userService.createUser();
   //   }
-  @NoAuth()
-  @Post('/dto')
-  // @ApiOperation({ description: '创建用户Dto' })
-  async createTest(@Body() createUserDto: CreateUserDto) {
-    console.log(createUserDto);
-    return true;
-  }
 
   /**
    * 创建充值订单

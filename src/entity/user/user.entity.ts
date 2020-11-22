@@ -1,29 +1,27 @@
 import { Column, Entity, Index, PrimaryColumn } from 'typeorm';
-import { NoIdBase } from '../baseClass/noIdBase';
-import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType } from '@nestjs/graphql';
+import { Base } from '../baseClass/base';
+import { UserConfig } from './user.config.entity';
 
 /**
  * 用户
  */
 @ObjectType()
 @Entity('user')
-export class User extends NoIdBase {
-  @Field({ nullable: true, description: '我是id' })
-  @PrimaryColumn()
-  id: string;
+export class User extends Base {
 
   @Index({})
-  @Field({ nullable: true })
+  @Field({ nullable: true, description: 'name' })
   @Column({ comment: 'name', nullable: true })
   name: string;
 
   @Index({ unique: true })
-  @Field({ nullable: true })
+  @Field({ nullable: true, description: '手机号码' })
   @Column({ comment: '手机号码', nullable: true })
   phone: string;
 
-  @Field({ nullable: true })
-  @Column({ comment: '角色id', nullable: true })
+  @Field({ nullable: true, description: '角色编号' })
+  @Column({ comment: '角色编号', nullable: true })
   roleNo: string;
 
   @Field({ nullable: true })
@@ -36,4 +34,13 @@ export class User extends NoIdBase {
   email: string;
 
   rolesList: string[];
+
+  //#region 
+
+  /**
+   * 子域挂载的时候一定要写这个要不然会报
+   *  Error: Undefined type error. Make sure you are providing an explicit type for the "userConfig" of the "UserResolver" class.
+  */
+  @Field(() => UserConfig, { nullable: true })
+  userConfig: UserConfig;
 }

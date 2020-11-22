@@ -4,7 +4,7 @@ export default {
   port: 5432,
   username: 'postgres',
   password: 'postgres',
-  database: 'postgres',
+  database: 'liang',
   timezone: 'UTC',
   charset: 'utf8mb4',
   synchronize: true,

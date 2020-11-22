@@ -11,10 +11,6 @@ export class Base {
   id: string;
 
   @Field({ nullable: true })
-  @Column({ comment: '备注', nullable: true })
-  remarks: string;
-
-  @Field({ nullable: true })
   @CreateDateColumn()
   createTime: Date;
 

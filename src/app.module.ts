@@ -10,6 +10,8 @@ import { RedisModule } from './common/special-modules/redis/redis.module';
 import { UserModule } from './modules/user/user.module';
 import { GlobalAuthGuard } from './common/globalGuard/auth.guard';
 import { ComplexityPlugin } from './common/plugin/graphql.complexity';
+import { RegisterModule } from './modules/register/register.module';
+import { DataLoaderModule } from './modules/data-loader/data-loader.module';
 
 @Module({
   imports: [
@@ -22,6 +24,8 @@ import { ComplexityPlugin } from './common/plugin/graphql.complexity';
     RedisModule,
     DatabaseModule,
     HealthCheckModule,
+    RegisterModule,
+    DataLoaderModule,
   ],
   providers: [
     {

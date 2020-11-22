@@ -1,6 +1,7 @@
-import { Entity, Column, Index, PrimaryGeneratedColumn } from 'typeorm';
-import { Base } from '../baseClass/base';
+import { Entity, Column, Index } from 'typeorm';
 import { ObjectType, Field } from '@nestjs/graphql';
+import { Base } from '../baseClass/base';
+import { FeeEnum } from '../../common/enum/common.enum';
 
 /**
  * 用户
@@ -15,6 +16,10 @@ export class UserConfig extends Base {
   userId: string;
 
   @Field({ nullable: true })
-  @Column({ type: 'boolean', default: false, comment: '是否开通极速换汇' })
-  ableTrade: boolean;
+  @Column({ type: 'float8', default: 0, comment: 'fee' })
+  fee: number;
+
+  @Field(() => String, { nullable: true, })
+  @Column({ type: 'text', comment: 'fee' })
+  feeType: FeeEnum
 }

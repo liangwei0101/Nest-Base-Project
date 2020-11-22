@@ -6,16 +6,11 @@ import { User } from '../../entity/user/user.entity';
 import { UserResolver } from './user.resolver';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [],
   controllers: [UserController],
   providers: [
     UserService,
     UserResolver,
-    // UserConfigDataLoader,
-    // {
-    //   provide: APP_INTERCEPTOR,
-    //   useClass: DataLoaderInterceptor,
-    // },
   ],
   exports: [UserService],
 })

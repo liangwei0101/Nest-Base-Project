@@ -8,10 +8,10 @@ import { IPaginationResult } from './IPaginationResults';
 export class Pagination<T> {
   public data: T[];
 
-  @Field({ nullable: true, description: 'pageTotal' })
+  @Field({ nullable: true, description: '当前数据条数' })
   public pageTotal: number;
 
-  @Field({ nullable: true, description: 'total' })
+  @Field({ nullable: true, description: '总条数' })
   public total: number;
 
   constructor(paginationResults: IPaginationResult<T>) {
