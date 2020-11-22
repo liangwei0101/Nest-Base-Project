@@ -5,6 +5,9 @@ import { FeeEnum } from '../../common/enum/common.enum';
 import { UserConfig } from '../../entity/user/user.config.entity';
 import { User } from '../../entity/user/user.entity';
 
+/**
+ * 全局统一注册表
+ */
 @Global()
 @Module({
   imports: [

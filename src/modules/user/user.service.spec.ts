@@ -20,7 +20,6 @@ import { INestApplication } from '@nestjs/common';
 const user = new User();
 user.name = '梁二狗';
 user.email = '272262983@qq.com';
-user.remarks = 'remarks';
 user.roleNo = '300';
 user.locked = false;
 user.phone = '18770919134';

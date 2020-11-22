@@ -1,4 +1,4 @@
-import { Column, Entity, Index, PrimaryColumn } from 'typeorm';
+import { Column, Entity, Index } from 'typeorm';
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Base } from '../baseClass/base';
 import { UserConfig } from './user.config.entity';
