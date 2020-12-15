@@ -3632,6 +3632,13 @@ constants-browserify@^1.0.0:
   resolved "https://registry.yarnpkg.com/constants-browserify/-/constants-browserify-1.0.0.tgz#c20b96d8c617748aaf1c16021760cd27fcb8cb75"
   integrity sha1-wguW2MYXdIqvHBYCF2DNJ/y4y3U=
 
+consul@^0.39.0:
+  version "0.39.0"
+  resolved "https://registry.yarnpkg.com/consul/-/consul-0.39.0.tgz#4cca710c9caf10b2a3ba6b819914602f8a83186b"
+  integrity sha512-FeEr+B+ADEGzoKonNkheKu0QbODdYKbY9TbWaxX9MHcdlmBuJWlIFMcD1JVrQpTrZEM+z+7AJBz+uw5MOD3giA==
+  dependencies:
+    papi "^0.29.0"
+
 contains-path@^0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/contains-path/-/contains-path-0.1.0.tgz#fe8cf184ff6670b6baef01a9d4861a5cbec4120a"
@@ -7629,6 +7636,11 @@ pako@~1.0.5:
   version "1.0.11"
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.11.tgz#6c9599d340d54dfd3946380252a35705a6b992bf"
   integrity sha512-4hLB8Py4zZce5s4yd9XzopqwVv/yGNhV1Bl8NTmCq1763HeK2+EwVTv+leGeL13Dnh2wfbqowVPXCIO0z4taYw==
+
+papi@^0.29.0:
+  version "0.29.1"
+  resolved "https://registry.yarnpkg.com/papi/-/papi-0.29.1.tgz#7373e2c527f5117d61fd2a0e6c6b1dd72bf7f180"
+  integrity sha512-Y9ipSMfWuuVFO3zY9PlxOmEg+bQ7CeJ28sa9/a0veYNynLf9fwjR3+3fld5otEy7okUaEOUuCHVH62MyTmACXQ==
 
 parallel-transform@^1.1.0:
   version "1.2.0"

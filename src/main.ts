@@ -9,6 +9,7 @@ import { TransformInterceptor } from './common/httpHandle/transform.interceptor'
 import { TimeoutInterceptor } from './common/httpHandle/timeout.interceptor';
 import * as bodyParser from 'body-parser';
 import { getConnection } from 'typeorm';
+import { ConsulConfig } from './common/utils/consulConfigUtil';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -59,5 +60,10 @@ async function bootstrap() {
   app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 
   console.log('application is start :' + 3000);
+
+  // TODO 如果本地没有装的话，把注册中心的相关代码去掉。
+  if (true) {
+    new ConsulConfig();
+  }
 }
 bootstrap();

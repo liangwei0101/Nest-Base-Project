@@ -38,6 +38,7 @@
     "cache-manager-redis-store": "^2.0.0",
     "class-transformer": "^0.3.1",
     "class-validator": "^0.12.2",
+    "consul": "^0.39.0",
     "crypto": "^1.0.1",
     "dataloader": "^2.0.0",
     "express-rate-limit": "^5.1.3",
